@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import Game from './scene/Game.js';
+import Game from './scene/Game.ts';
 
 const config = {
   type: Phaser.AUTO,

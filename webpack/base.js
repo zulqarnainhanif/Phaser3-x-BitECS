@@ -17,6 +17,13 @@ module.exports = {
         }
       },
       {
+        test: /\.ts$|\.tsx$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'ts-loader'
+        },
+      },
+      {
         test: [/\.vert$/, /\.frag$/],
         use: "raw-loader"
       },
@@ -25,6 +32,9 @@ module.exports = {
         use: "file-loader"
       }
     ]
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.png']
   },
   plugins: [
     new CleanWebpackPlugin({

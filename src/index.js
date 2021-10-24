@@ -1,12 +1,13 @@
-   import Phaser from 'phaser';
-   import Game from './scene/Game.ts';
+import Phaser from 'phaser';
 
-   const config = {
-     type: Phaser.AUTO,
-     parent: 'game',
-     width: 900,
-     height: 600,
-     scene: Game
-   };
+import Game from './scene/Game.js';
 
-   const game = new Phaser.Game(config);
+const config = {
+  type: Phaser.AUTO,
+  parent: 'game',
+  width: 900,
+  height: 600,
+  scene: Game
+};
+
+const game = new Phaser.Game(config);

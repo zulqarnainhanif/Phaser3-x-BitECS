@@ -8,6 +8,7 @@ import {
 } from "bitecs";
 
 import { CPU } from "../components/CPU";
+import { Input } from "../components/Input";
 import { Sprite } from "../components/Sprite";
 import { Player } from "../components/Player";
 import { Position } from "../components/Position";
@@ -52,6 +53,8 @@ export default class Game extends Phaser.Scene {
     Position.x[tank] = 450;
     Position.y[tank] = 300;
 
+    addComponent(this.world, Input, tank);
+
     addComponent(this.world, Velocity, tank);
 
     addComponent(this.world, Direction, tank);
@@ -68,6 +71,8 @@ export default class Game extends Phaser.Scene {
       addComponent(this.world, Position, cpuPlayer);
       Position.x[cpuPlayer] = Phaser.Math.Between(width * 0.25, width * 0.75);
       Position.y[cpuPlayer] = Phaser.Math.Between(height * 0.25, height * 0.75);
+
+      addComponent(this.world, Input, cpuPlayer);
 
       addComponent(this.world, Velocity, cpuPlayer);
 
@@ -89,8 +94,8 @@ export default class Game extends Phaser.Scene {
   update(t:number, dt:number) {
     if(!this.world) return;
 
-    this.cpuSystem?.(this.world);
     this.playerSystem?.(this.world);
+    this.cpuSystem?.(this.world);
     this.movementSystem?.(this.world);
     this.spriteSystem?.(this.world);
   }

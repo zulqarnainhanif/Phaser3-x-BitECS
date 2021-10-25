@@ -1,12 +1,16 @@
 import { defineQuery, defineSystem } from "bitecs";
 
+import { Move } from "../enums/Move";
 import { CPU } from "../components/CPU";
+import { Input } from "../components/Input";
 import { Velocity } from "../components/Velocity";
 import { Direction } from "../components/Direction";
 
 export const createCPUSystem = (scene: Phaser.Scene) => {
+    
+  const cpuPlayerQuery = defineQuery([CPU, Velocity, Direction, Input]);
+
   return defineSystem(world => {
-    const cpuPlayerQuery = defineQuery([CPU, Velocity, Direction]);
     const entities = cpuPlayerQuery(world);
     const dt = scene.game.loop.delta;
 
@@ -22,35 +26,26 @@ export const createCPUSystem = (scene: Phaser.Scene) => {
       switch (rand) {
         //left
         case 0:
-          Velocity.x[entity] = -5;
-          Velocity.y[entity] = 0;
-          Direction.angle[entity] = 270
+          Input.direction[entity] = Move.Left
           break;
 
         // right
         case 1:
-          Velocity.x[entity] = 5;
-          Velocity.y[entity] = 0;
-          Direction.angle[entity] = 90
+          Input.direction[entity] = Move.Right
           break;
 
         // up
         case 2:
-          Velocity.x[entity] = 0;
-          Velocity.y[entity] = 5;
-          Direction.angle[entity] = 0
+          Input.direction[entity] = Move.Up
           break;
 
         // down
         case 3:
-          Velocity.x[entity] = 0;
-          Velocity.y[entity] = -5;
-          Direction.angle[entity] = 180
+          Input.direction[entity] = Move.Down
           break;
 
         default:
-          Velocity.x[entity] = 0;
-          Velocity.y[entity] = 0;
+          Input.direction[entity] = Move.None
       }
         
 
